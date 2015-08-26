@@ -1,3 +1,5 @@
+# Changed the original file to point to 'joomlagovbr' repository
+
 FROM php:5.6-apache
 MAINTAINER Michael Babker <michael.babker@joomla.org> (@mbabker)
 
@@ -17,10 +19,10 @@ ENV JOOMLA_VERSION 3.4.3
 ENV JOOMLA_SHA1 cd35ed61029d2ed0dc38cc70073944786bba7979
 
 # Download package and extract to web volume
-RUN curl -o joomla.zip -SL https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Stable-Full_Package.zip \
-	&& echo "$JOOMLA_SHA1 *joomla.zip" | sha1sum -c - \
+RUN curl -o joomla.zip -SL https://github.com/joomlagovbr/joomla-3.x/archive/dev.zip \
 	&& mkdir /usr/src/joomla \
-	&& unzip joomla.zip -d /usr/src/joomla \
+	&& unzip joomla.zip -d /tmp \
+        && cp -R /tmp/joomla-3.x-dev/* /usr/src/joomla \
 	&& rm joomla.zip \
 	&& chown -R www-data:www-data /usr/src/joomla
 
