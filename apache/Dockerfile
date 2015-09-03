@@ -1,4 +1,6 @@
-# Changed the original file to point to 'joomlagovbr' repository
+# Changes to original:
+# 1- point to 'joomlagovbr' repository
+# 2- copy custom php.ini settings
 
 FROM php:5.6-apache
 MAINTAINER Michael Babker <michael.babker@joomla.org> (@mbabker)
@@ -29,6 +31,9 @@ RUN curl -o joomla.zip -SL https://github.com/joomlagovbr/joomla-3.x/archive/dev
 # Copy init scripts and custom .htaccess
 COPY docker-entrypoint.sh /entrypoint.sh
 COPY makedb.php /makedb.php
+
+# Copy php ini settings
+COPY website-customizations.ini /usr/local/etc/php/conf.d/webite-customizations.ini
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
